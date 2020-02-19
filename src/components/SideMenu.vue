@@ -1,6 +1,5 @@
 <template>
-  <div class="home">
-    <h1>测试iview的menu控件</h1>
+  <div id="sideMenu">
     <Menu
       width="150px"
       ref="menu"
@@ -37,48 +36,18 @@
         <MenuItem name="3">菜单2-1</MenuItem>
       </Submenu> -->
     </Menu>
-
-    <Button type="primary" @click="openMenu">
-      sss
-    </Button>
   </div>
 </template>
 
 <script>
-  // @ is an alias to /src
-
-  import mockData from '@/mock/menu.js';
-
   export default {
-    name: 'Home',
-    components: {},
-    data() {
-      return {
-        openNames: mockData.openNames,
-        activeMenu: mockData.activeMenu,
-        menuList: mockData.menuList
-      };
-    },
-    methods: {
-      menuSelect: function(name) {
-        alert(name);
-      },
-      openMenu: function() {
-        this.openNames = [1, 2];
-        this.activeMenu = 22;
-        this.$nextTick(() => {
-          this.$refs.menu.updateOpened();
-
-          this.openNames = [1, 2, 3];
-          this.activeMenu = 33;
-          this.$nextTick(() => {
-            this.$refs.menu.updateOpened();
-          });
-        });
+    props: {
+      menuList: {
+        type: Array,
+        default: () => []
       }
     }
-    // mounted() {
-    //   this.activeMenu = 11;
-    // }
   };
 </script>
+
+<style></style>
