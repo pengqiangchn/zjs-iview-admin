@@ -1,84 +1,9 @@
 <template>
   <div class="home">
-    <h1>测试iview的menu控件</h1>
-    <Menu
-      width="150px"
-      ref="menu"
-      @on-select="menuSelect"
-      :open-names="openNames"
-      :active-name="activeMenu"
-    >
-      <template v-for="item in menuList">
-        <Submenu :key="item.name" :name="item.name">
-          <template slot="title">
-            {{ item.title }}
-          </template>
-          <template v-for="menuItem in item.children">
-            <MenuItem :key="menuItem.name" :name="menuItem.name">
-              {{ menuItem.title }}
-            </MenuItem>
-          </template>
-        </Submenu>
-      </template>
-
-      <br /><br /><br />
-      <!-- <Submenu name="1">
-        <template slot="title">
-          菜单1
-        </template>
-        <MenuItem name="1">菜单1-1</MenuItem>
-        <MenuItem name="2" to="menu2">菜单1-2</MenuItem>
-        <MenuItem name="3" to="about">菜单1-3</MenuItem>
-      </Submenu>
-      <Submenu name="2">
-        <template slot="title">
-          菜单2
-        </template>
-        <MenuItem name="3">菜单2-1</MenuItem>
-      </Submenu> -->
-    </Menu>
-
-    <Button type="primary" @click="openMenu">
-      sss
-    </Button>
+    <h1>这是Home</h1>
   </div>
 </template>
 
 <script>
   // @ is an alias to /src
-
-  import mockData from '@/mock/menu.js';
-
-  export default {
-    name: 'Home',
-    components: {},
-    data() {
-      return {
-        openNames: mockData.openNames,
-        activeMenu: mockData.activeMenu,
-        menuList: mockData.menuList
-      };
-    },
-    methods: {
-      menuSelect: function(name) {
-        alert(name);
-      },
-      openMenu: function() {
-        this.openNames = [1, 2];
-        this.activeMenu = 22;
-        this.$nextTick(() => {
-          this.$refs.menu.updateOpened();
-
-          this.openNames = [1, 2, 3];
-          this.activeMenu = 33;
-          this.$nextTick(() => {
-            this.$refs.menu.updateOpened();
-          });
-        });
-      }
-    }
-    // mounted() {
-    //   this.activeMenu = 11;
-    // }
-  };
 </script>

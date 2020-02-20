@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import IView from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import 'lib-flexible';
 
 Vue.config.productionTip = false;
 

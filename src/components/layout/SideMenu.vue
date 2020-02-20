@@ -1,5 +1,6 @@
 <template>
   <div id="sideMenu">
+    <slot></slot>
     <Menu
       width="150px"
       ref="menu"
@@ -19,22 +20,6 @@
           </template>
         </Submenu>
       </template>
-
-      <br /><br /><br />
-      <!-- <Submenu name="1">
-        <template slot="title">
-          菜单1
-        </template>
-        <MenuItem name="1">菜单1-1</MenuItem>
-        <MenuItem name="2" to="menu2">菜单1-2</MenuItem>
-        <MenuItem name="3" to="about">菜单1-3</MenuItem>
-      </Submenu>
-      <Submenu name="2">
-        <template slot="title">
-          菜单2
-        </template>
-        <MenuItem name="3">菜单2-1</MenuItem>
-      </Submenu> -->
     </Menu>
   </div>
 </template>
@@ -45,6 +30,19 @@
       menuList: {
         type: Array,
         default: () => []
+      },
+      openNames: {
+        type: Array,
+        default: () => []
+      },
+      activeMenu: {
+        type: String,
+        default: ""
+      }
+    },
+    methods: {
+      menuSelect: function(name) {
+        this.$emit("menuSelect", name);
       }
     }
   };
