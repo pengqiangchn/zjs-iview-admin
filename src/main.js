@@ -2,13 +2,13 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import IView from 'view-design';
+import iView from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import 'lib-flexible';
 
 Vue.config.productionTip = false;
 
-Vue.use(IView);
+Vue.use(iView);
 
 new Vue({
   router,
