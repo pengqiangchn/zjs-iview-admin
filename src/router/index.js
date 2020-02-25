@@ -28,7 +28,8 @@ const turnTo = (to, access, next) => {
     next();
   } else {
     //无权限则重定向 401.
-    next({ replace: true, name: 'error_401' });
+    // next({ replace: true, name: 'error_401' });
+    next();
   }
 };
 
@@ -60,7 +61,7 @@ const canTurnTo = (name, access, routes) => {
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
-  const token = '';
+  const token = '123';
   if (!token && to.name !== PAGE_LOGIN) {
     //如果没登录,并且当前跳转界面不是登录页面
     next(

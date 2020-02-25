@@ -7,3 +7,14 @@
 export const hasOneOf = (targetarr, arr) => {
   return targetarr.some(_ => arr.indexOf(_) > -1);
 };
+
+/**
+ * @description 判断是否是IE
+ * @returns boolean
+ */
+export function isIE() {
+  const bw = window.navigator.userAgent;
+  const compare = s => bw.indexOf(s) >= 0;
+  const ie11 = (() => 'ActiveXObject' in window)();
+  return compare('MSIE') || ie11;
+}

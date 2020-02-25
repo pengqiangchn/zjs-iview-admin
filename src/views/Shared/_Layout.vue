@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import mockData from "@/mock/menu.js";
+  import mockData from "@/mock/services/menu";
   import SideMenu from "@/components/layout/SideMenu";
   import HeadBar from "@/components/layout/HeadBar";
   import maxLogo from "@/assets/img/logo.jpg";

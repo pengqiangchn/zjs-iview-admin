@@ -6,6 +6,8 @@ import iView from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import 'lib-flexible';
 
+import './mock/index';
+
 Vue.config.productionTip = false;
 
 Vue.use(iView);
