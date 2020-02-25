@@ -14,9 +14,9 @@
         </side-menu>
       </Sider>
       <Layout>
-        <Header class="_LayoutHeader">
+        <!-- <Header class="_LayoutHeader">
           <head-bar> </head-bar>
-        </Header>
+        </Header> -->
         <Content>
           这是内容
           <!-- 路由出口 -->

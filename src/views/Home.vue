@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>这是Home</h1>
+    <Button type="primary" @click="btnClick">测试</Button>
   </div>
 </template>
 
@@ -16,13 +17,18 @@
 
   var sss = null;
 
-  login(loginData).then(res => {
-    console.log(res);
-    const data = res.data;
-    // console.log(login);
-    sss = data;
-  });
+  export default {
+    methods: {
+      btnClick() {
+        login(loginData).then(res => {
+          console.log(res);
+          const data = res.data;
+          console.log(data);
+          sss = data;
 
-  console.log(sss);
-  export default {};
+          console.log(sss);
+        });
+      }
+    }
+  };
 </script>

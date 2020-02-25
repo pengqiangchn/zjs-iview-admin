@@ -18,3 +18,13 @@ export function isIE() {
   const ie11 = (() => 'ActiveXObject' in window)();
   return compare('MSIE') || ie11;
 }
+
+/**
+ * @description
+ * @param {*} baseURL
+ * @param {*} requestedURL
+ * @returns
+ */
+export function buildFullPath(baseURL, requestedURL) {
+  return requestedURL ? baseURL.replace(/\/+$/, '') + '/' + requestedURL.replace(/^\/+/, '') : baseURL;
+}
