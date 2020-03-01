@@ -1,29 +1,93 @@
-# zjs-iview-admin
+# zjs-iview-frame
+[devlog]:/DevLog.md
 
-## Project setup
+## 基于iview后台管理框架
+学习并制作后台管理框架,提供一些标准控件进行使用.后期计划在这个框架基础上做一些实例
+
+
+vue + vuex + axios
+
+
+## 框架说明
+
+### 开发内容
+具体更新内容,可查看[开发日志][devlog].
+
+框架
+- [x] 路由管理
+- [ ] 状态管理
+- [x] 封装request
+- [ ] mock基础架构
+- [ ] ls基础架构
+- [ ] 主体框架设计
+- [ ] 路由权限设计
+- [ ] 功能按钮权限设计
+
+界面开发
+- [ ] 组件内容开发
+  - [ ] 卡片
+  - [ ] 数字
+  - [ ] 选择树
+  - [ ] 标签
+- [ ] 仪表盘
+  - [ ] 控制台
+  - [ ] 工作台
+- [ ] 表单页
+  - [ ] 基础表单
+  - [ ] 分步表单
+  - [ ] 高级表单
+- [ ] 列表
+  - [ ] 标准列表
+  - [ ] 卡片列表
+  - [ ] 商品列表
+- [ ] 搜索页面
+  - [ ] 文章
+  - [ ] 项目
+  - [ ] 应用
+- [ ] 表格
+  - [ ] 查询表格
+  - [ ] 树形表格
+- [ ] 详情页
+  - [ ] 基础详情页
+  - [ ] 高级详情页
+- [ ] 结果页面
+  - [ ] 成功页
+  - [ ] 失败页
+- [ ] 异常页面
+  - [ ] 401
+  - [ ] 404
+  - [ ] 500
+
+## 涉及到主要的包
+
+- vue           --基础
+- vuex          --状态管理
+- vue-ls        --Storage
+- vue-router    --路由
+- axios         --http
+- view-design   --UI
+
+开发工具
+- mockjs2       --mock
+
+
+
+## 安装
+
+安装包
 ```
 yarn install
 ```
-
-### Compiles and hot-reloads for development
+运行
 ```
 yarn serve
 ```
-
-### Compiles and minifies for production
+发布
 ```
 yarn build
 ```
-
-### Run your unit tests
+测试
 ```
 yarn test:unit
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

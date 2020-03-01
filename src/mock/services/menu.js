@@ -1,32 +1,10 @@
 export default {
-  openNames: [1],
-  activeMenu: 11,
+  openNames: ['home'],
+  activeMenu: '',
   menuList: [
     {
-      name: 1,
-      title: '菜单1',
-      children: [
-        {
-          name: 'home',
-          title: '首页',
-          isShow: true
-        },
-        {
-          name: 'about',
-          title: '关于',
-          isShow: false
-        },
-        {
-          name: 13,
-          title: '菜单1-3',
-          isShow: true
-        },
-        {
-          name: 14,
-          title: '菜单1-4',
-          isShow: true
-        }
-      ]
+      name: 'home',
+      title: '首页'
     },
     {
       name: 2,

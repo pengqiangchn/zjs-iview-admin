@@ -31,7 +31,8 @@
 </template>
 
 <script>
-  import mockData from "@/mock/services/menu";
+  // import mockData from "@/mock/services/menu";
+  import menuList from "@/router/router-config";
   import SideMenu from "@/components/layout/SideMenu";
   import HeadBar from "@/components/layout/HeadBar";
   import maxLogo from "@/assets/img/logo.jpg";
@@ -49,7 +50,7 @@
         collapsed: false,
         maxLogo,
         minLogo,
-        menuList: mockData.menuList
+        menuList: menuList
       };
     },
     methods: {
