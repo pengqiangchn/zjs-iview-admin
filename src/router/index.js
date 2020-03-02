@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import iView from 'view-design';
 import routes from './router-config.js';
 import { hasOneOf } from '@/libs/util.js';
+import lsUser from '@/storage/user';
 
 const PAGE_LOGIN = 'login';
 const PAGE_DEFAULT = 'home';
@@ -14,6 +15,33 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  iView.LoadingBar.start();
+  const token = lsUser.getAccessToken();
+  if (!token && to.name !== PAGE_LOGIN) {
+    //如果没登录,并且当前跳转界面不是登录页面
+    next(
+      //跳转登录页面
+      { name: PAGE_LOGIN }
+    );
+  } else if (!token && PAGE_WHITELIST.includes(to.name)) {
+    //如果未登录,跳转是白名单,则跳转
+    next();
+  } else if (token && to.name === PAGE_LOGIN) {
+    //如果已经登陆了,跳转是登录界面,则跳转到主页
+    next({ name: PAGE_DEFAULT });
+  } else {
+    //进行跳转
+    let access = ['user'];
+    turnTo(to, access, next);
+  }
+});
+
+router.afterEach(() => {
+  iView.LoadingBar.finish();
+  window.scrollTo(0, 0);
 });
 
 /**
@@ -58,32 +86,5 @@ const canTurnTo = (name, access, routes) => {
 
   return permissionjudge(routes);
 };
-
-router.beforeEach((to, from, next) => {
-  iView.LoadingBar.start();
-  const token = '123';
-  if (!token && to.name !== PAGE_LOGIN) {
-    //如果没登录,并且当前跳转界面不是登录页面
-    next(
-      //跳转登录页面
-      { name: PAGE_LOGIN }
-    );
-  } else if (!token && PAGE_WHITELIST.includes(to.name)) {
-    //如果未登录,跳转是白名单,则跳转
-    next();
-  } else if (token && to.name === PAGE_LOGIN) {
-    //如果已经登陆了,跳转是登录界面,则跳转到主页
-    next({ name: PAGE_DEFAULT });
-  } else {
-    //进行跳转
-    let access = ['user'];
-    turnTo(to, access, next);
-  }
-});
-
-router.afterEach(() => {
-  iView.LoadingBar.finish();
-  window.scrollTo(0, 0);
-});
 
 export default router;

@@ -1,14 +1,17 @@
 import axios from '@/libs/request';
 
-export const login = ({ userName, password }) => {
-  const data = {
-    userName,
-    password
-  };
-
+export const login = data => {
   return axios.request({
     url: 'login',
-    data,
+    data: data,
+    method: 'post'
+  });
+};
+
+export const logout = data => {
+  return axios.request({
+    url: 'logout',
+    data: data,
     method: 'post'
   });
 };

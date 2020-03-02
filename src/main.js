@@ -2,15 +2,13 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import iView from 'view-design';
-import 'view-design/dist/styles/iview.css';
-import 'lib-flexible';
 
+//正式需要注释
 import './mock/index';
 
-Vue.config.productionTip = false;
+import '@/config/use';
 
-Vue.use(iView);
+Vue.config.productionTip = false;
 
 new Vue({
   router,

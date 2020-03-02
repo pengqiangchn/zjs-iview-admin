@@ -5,7 +5,8 @@
         "paths": {
             "@/*": ["src/*"],
             "@c/*": ["src/components/*"],
-            "@v/*": ["src/views/*"]
+            "@v/*": ["src/views/*"],
+            "@api/*": ["src/api/*"]
         }
     },
     "exclude": ["node_modules", "dist"],

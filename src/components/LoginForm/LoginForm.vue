@@ -4,23 +4,34 @@
       <Input type="text" v-model="userData.userName" placeholder="用户名">
       </Input>
     </FormItem>
-    <FormItem prop="passWord">
-      <Input type="password" v-model="userData.passWord" placeholder="密码">
+    <FormItem prop="password">
+      <Input type="password" v-model="userData.password" placeholder="密码">
       </Input>
     </FormItem>
     <FormItem>
-      <Button type="primary" @click="handleSubmit('loginForm')">登录</Button>
+      <Button
+        type="primary"
+        :loading="loading"
+        @click="handleSubmit('loginForm')"
+        >登录</Button
+      >
     </FormItem>
   </Form>
 </template>
 
 <script>
   export default {
+    props: {
+      loading: {
+        type: Boolean,
+        default: false
+      }
+    },
     data() {
       return {
         userData: {
           userName: "",
-          passWord: ""
+          password: ""
         },
         loginRules: {
           userName: [
@@ -30,7 +41,7 @@
               trigger: "blur"
             }
           ],
-          passWord: [
+          password: [
             { required: true, message: "请输入密码!", trigger: "blur" },
             {
               type: "string",
@@ -45,10 +56,7 @@
       handleSubmit(name) {
         this.$refs[name].validate(valid => {
           if (valid) {
-            alert("返回数据");
             this.UserSubmit();
-          } else {
-            alert("登录失败");
           }
         });
       },

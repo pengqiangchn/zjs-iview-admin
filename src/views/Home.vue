@@ -1,32 +1,31 @@
 <template>
   <div class="home">
     <h1>这是Home</h1>
-    <Button type="primary" @click="btnClick">测试</Button>
+    <Button type="primary" @click="btnClick">退出</Button>
   </div>
 </template>
 
 <script>
   // @ is an alias to /src
 
-  import { login } from "@/api/user";
-
-  const loginData = {
-    userName: "test",
-    password: "001"
-  };
-
-  var sss = null;
+  import { logout } from "@/api/user";
 
   export default {
     methods: {
       btnClick() {
-        login(loginData).then(res => {
-          console.log(res);
-          const data = res.data;
-          console.log(data);
-          sss = data;
-
-          console.log(sss);
+        this.$Modal.confirm({
+          title: "提示",
+          content: "确认注销登录吗?",
+          onOk: () => {
+            return (
+              logout()
+                // .then(this.$router.push("login"))
+                .then()
+                .catch(error => {
+                  console.log(error);
+                })
+            );
+          }
         });
       }
     }

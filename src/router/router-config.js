@@ -32,16 +32,19 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
-    name: 'home',
+    redirect: '/home',
     component: BasicLayout,
-    meta: {
-      title: '首页',
-      icon: 'md-home'
-    }
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        meta: {
+          title: '首页',
+          icon: 'md-home'
+        },
+        component: () => import('@v/Home')
+      }
+    ]
   },
   {
     path: '/components',
@@ -288,7 +291,7 @@ const routes = [
   {
     path: '/exception',
     name: 'Exception',
-    redirect: '/exception/403',
+    redirect: '/exception/401',
     component: BasicLayout,
     meta: {
       title: '异常页面',
@@ -296,22 +299,22 @@ const routes = [
     },
     children: [
       {
-        path: '/401',
-        name: 'error_401',
+        path: '401',
+        name: 'exception_401',
         mata: {
           title: '401'
         }
       },
       {
-        path: '/404',
-        name: 'error_404',
+        path: '404',
+        name: 'exception_404',
         mata: {
           title: '404'
         }
       },
       {
-        path: '/500',
-        name: 'error_500',
+        path: '500',
+        name: 'exception_500',
         mata: {
           title: '500'
         }

@@ -1,31 +1,36 @@
 import axios from 'axios';
 // import store from '@/store';
 import config from '@/config/index';
-import { buildFullPath } from './util';
+import message from 'view-design/src/components/message';
+// node_modules/view-design/src/components/message/index.js
 
 const errorhandle = error => {
   if (error.response) {
     const {
-      config,
-      request: { status, statusText }
-    } = JSON.parse(JSON.stringify(error));
+      status,
+      data: { result }
+    } = JSON.parse(JSON.stringify(error.response));
 
-    const path = buildFullPath(config.baseURL, config.url);
+    // const path = buildFullPath(config.baseURL, config.url);
 
-    const errorInfo = { requestURL: path, status, statusText };
+    // const errorInfo = { requestURL: path, status, statusText };
+
+    // const router = Vue.$router;
+    const messages = message;
+    console.log(messages);
 
     if (status === 404) {
       //提示错误
-      console.log(errorInfo);
+      // console.log(error.response);
+      message.error({
+        content: '未找到资源'
+      });
     }
-    if (status === 401) {
+    //如果是401,当前返回值是 login返回的,则不跳转401
+    if (status === 401 && !(result && result.isLogin)) {
       //提示错误
-      console.log(errorInfo);
+      // console.log(error.response);
     }
-
-    // if (!responseURL.includes('save_error_logger')) {
-    //     store.dispatch('addErrorLog', info);
-    //   }
   }
 
   return Promise.reject(error);
