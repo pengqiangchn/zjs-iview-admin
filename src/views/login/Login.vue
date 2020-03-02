@@ -15,6 +15,7 @@
 <script>
   import LoginForm from "@c/LoginForm";
   import { mapActions } from "vuex";
+  import routes from "@/router/router-config";
 
   export default {
     data() {
@@ -28,7 +29,7 @@
       LoginForm
     },
     methods: {
-      ...mapActions(["Login"]),
+      ...mapActions(["Login", "SetUserMenuList"]),
       Submit(userData) {
         this.Login(userData)
           .then(res => {
@@ -45,8 +46,9 @@
       },
       LoginSuccess() {
         this.isLoginError = false;
+        this.SetUserMenuList({ routes: routes, roles: ["user"] });
         //获取用户信息,并跳转
-        this.$route.push("/");
+        this.$router.push("home");
       },
       LoginFail(error) {
         const result = error?.response?.data?.result;

@@ -32,11 +32,12 @@
 
 <script>
   // import mockData from "@/mock/services/menu";
-  import menuList from "@/router/router-config";
+  // import menuList from "@/router/router-config";
   import SideMenu from "@/components/layout/SideMenu";
   import HeadBar from "@/components/layout/HeadBar";
   import maxLogo from "@/assets/img/logo.jpg";
   import minLogo from "@/assets/img/logo-min.jpg";
+  // import
 
   export default {
     components: {
@@ -50,7 +51,7 @@
         collapsed: false,
         maxLogo,
         minLogo,
-        menuList: menuList
+        menuList: this.$store.getters.menuList
       };
     },
     methods: {

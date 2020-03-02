@@ -46,4 +46,6 @@ export const login = options => {
   return loginResponse;
 };
 
-export const logout = () => '';
+export const logout = () => ({
+  ss: ''
+});

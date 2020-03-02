@@ -9,12 +9,16 @@
       :active-name="activeMenu"
     >
       <template v-for="item in menuList">
-        <Submenu :key="item.name" :name="item.name">
+        <Submenu v-if="!item.isHide" :key="item.name" :name="item.name">
           <template slot="title">
             {{ item.title }}
           </template>
           <template v-for="menuItem in item.children">
-            <MenuItem :key="menuItem.name" :name="menuItem.name">
+            <MenuItem
+              v-if="!menuItem.isHide"
+              :key="menuItem.name"
+              :name="menuItem.name"
+            >
               {{ menuItem.title }}
             </MenuItem>
           </template>

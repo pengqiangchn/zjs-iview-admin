@@ -4,9 +4,9 @@ Boolean;
  * meta:{
  *  title:{String}
  *    显示标题栏、菜单栏、面包屑显示文字；
- *  show:{Boolean:true}
- *    菜单栏中是否显示,默认为true;
- *  roleId:{String[]}
+ *  isHide:{Boolean:false}
+ *    菜单栏中是否显示,默认为false;
+ *  roles:{String[]}
  *    可访问页面的权限,如果未设定,则不判断权限,当前路由设置会影响子路由;
  *  icon:({String:iview.icon| 自定义图标 }})
  *    设置菜单栏、面包屑图标；
@@ -25,7 +25,8 @@ const routes = [
     name: 'login',
     meta: {
       title: '登录',
-      show: false
+      isHide: false,
+      roles: ['admin']
     },
     component: () => import('@/views/login/Login.vue')
   },
@@ -34,6 +35,9 @@ const routes = [
     name: 'index',
     redirect: '/home',
     component: BasicLayout,
+    meta: {
+      isHide: true
+    },
     children: [
       {
         path: '/home',
@@ -58,28 +62,28 @@ const routes = [
       {
         path: 'card',
         name: 'card',
-        mata: {
+        meta: {
           title: '卡片'
         }
       },
       {
         path: 'num',
         name: 'num',
-        mata: {
+        meta: {
           title: '数字'
         }
       },
       {
         path: 'selectTree',
         name: 'selectTree',
-        mata: {
+        meta: {
           title: '选择树'
         }
       },
       {
         path: 'selectTag',
         name: 'selectTag',
-        mata: {
+        meta: {
           title: '选择标签'
         }
       }
@@ -98,14 +102,14 @@ const routes = [
       {
         path: 'console',
         name: 'console',
-        mata: {
+        meta: {
           title: '控制台'
         }
       },
       {
         path: 'workplace',
         name: 'workplace',
-        mata: {
+        meta: {
           title: '工作台'
         }
       }
@@ -124,21 +128,21 @@ const routes = [
       {
         path: 'basic-form',
         name: 'BasicForm',
-        mata: {
+        meta: {
           title: '基础表单'
         }
       },
       {
         path: 'step-form',
         name: 'StepForm',
-        mata: {
+        meta: {
           title: '分步表单'
         }
       },
       {
         path: 'advanced-form',
         name: 'AdvancedForm',
-        mata: {
+        meta: {
           title: '高级表单'
         }
       }
@@ -157,21 +161,21 @@ const routes = [
       {
         path: 'basic-list',
         name: 'BasicList',
-        mata: {
+        meta: {
           title: '标准列表'
         }
       },
       {
         path: 'card-list',
         name: 'CardList',
-        mata: {
+        meta: {
           title: '卡片列表'
         }
       },
       {
         path: 'goods-list',
         name: 'GoodsList',
-        mata: {
+        meta: {
           title: '商品列表'
         }
       }
@@ -190,21 +194,21 @@ const routes = [
       {
         path: 'search-artcle',
         name: 'SearchArtcle',
-        mata: {
+        meta: {
           title: '搜索列表(文章)'
         }
       },
       {
         path: 'search-projects',
         name: 'SearchProjects',
-        mata: {
+        meta: {
           title: '搜索列表(项目)'
         }
       },
       {
         path: 'search-apps',
         name: 'SearchApps',
-        mata: {
+        meta: {
           title: '搜索列表(应用)'
         }
       }
@@ -223,14 +227,14 @@ const routes = [
       {
         path: 'basic-table',
         name: 'BasicTable',
-        mata: {
+        meta: {
           title: '查询表格'
         }
       },
       {
         path: 'tree-table',
         name: 'TreeTable',
-        mata: {
+        meta: {
           title: '树形表格'
         }
       }
@@ -249,14 +253,14 @@ const routes = [
       {
         path: 'basic-profile',
         name: 'BasicProfile',
-        mata: {
+        meta: {
           title: '基础详情页'
         }
       },
       {
         path: 'advanced-profile',
         name: 'AdvancedProfile',
-        mata: {
+        meta: {
           title: '高级详情页'
         }
       }
@@ -275,23 +279,23 @@ const routes = [
       {
         path: 'success',
         name: 'Success',
-        mata: {
+        meta: {
           title: '成功页'
         }
       },
       {
         path: 'fail',
         name: 'Fail',
-        mata: {
+        meta: {
           title: '失败页'
         }
       }
     ]
   },
   {
-    path: '/exception',
-    name: 'Exception',
-    redirect: '/exception/401',
+    path: '*',
+    name: 'error',
+    redirect: '/error/404',
     component: BasicLayout,
     meta: {
       title: '异常页面',
@@ -300,52 +304,40 @@ const routes = [
     children: [
       {
         path: '401',
-        name: 'exception_401',
-        mata: {
-          title: '401'
-        }
-      },
-      {
-        path: '404',
-        name: 'exception_404',
-        mata: {
-          title: '404'
-        }
+        name: '401',
+        meta: {
+          title: '无权限访问',
+          isHide: false
+        },
+        component: () => import('@/views/error-page/401.vue')
       },
       {
         path: '500',
-        name: 'exception_500',
-        mata: {
-          title: '500'
-        }
+        name: '500',
+        meta: {
+          title: '服务器相应失败',
+          isHide: false
+        },
+        component: () => import('@/views/error-page/500.vue')
+      },
+      {
+        //上面的都没匹配 就到404
+        path: '404',
+        name: '404',
+        meta: {
+          title: '未找到资源',
+          isHide: false
+        },
+        component: () => import('@/views/error-page/404.vue')
       }
     ]
   },
   {
-    path: '/401',
-    name: 'error_401',
-    meta: {
-      title: '无权限访问',
-      show: false
-    },
-    component: () => import('@/views/error-page/401.vue')
-  },
-  {
-    path: '/500',
-    name: 'error_500',
-    meta: {
-      title: '服务器相应失败',
-      show: false
-    },
-    component: () => import('@/views/error-page/500.vue')
-  },
-  {
-    //上面的都没匹配 就到404
-    path: '*',
+    path: '/error_404',
     name: 'error_404',
     meta: {
       title: '未找到资源',
-      show: false
+      isHide: false
     },
     component: () => import('@/views/error-page/404.vue')
   }

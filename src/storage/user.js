@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { DAY_MS } from '@/libs/common';
+import { DAY_MS } from '@/libs/common-type';
 
 const ls = {
   setAccessToken(token) {

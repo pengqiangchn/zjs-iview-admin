@@ -34,8 +34,9 @@ router.beforeEach((to, from, next) => {
     next({ name: PAGE_DEFAULT });
   } else {
     //进行跳转
-    let access = ['user'];
-    turnTo(to, access, next);
+    // let access = ['admin'];
+    // turnTo(to, access, next);
+    next();
   }
 });
 
@@ -44,47 +45,47 @@ router.afterEach(() => {
   window.scrollTo(0, 0);
 });
 
-/**
- * @description
- * @param {*} to 需跳转路由
- * @param {*} access 用户权限数据
- * @param {*} next
- */
-const turnTo = (to, access, next) => {
-  if (canTurnTo(to.name, access, routes)) {
-    //有权限 则继续访问
-    next();
-  } else {
-    //无权限则重定向 401.
-    // next({ replace: true, name: 'error_401' });
-    next();
-  }
-};
+// /**
+//  * @description
+//  * @param {*} to 需跳转路由
+//  * @param {*} access 用户权限数据
+//  * @param {*} next
+//  */
+// const turnTo = (to, access, next) => {
+//   if (canTurnTo(to.name, access, routes)) {
+//     //有权限 则继续访问
+//     next();
+//   } else {
+//     //无权限则重定向 401.
+//     // next({ replace: true, name: 'error_401' });
+//     next();
+//   }
+// };
 
-/**
- * @description 用户是否可跳转页面
- * @param {String} name 跳转页面路由name
- * @param {Array} access 用户权限数组
- * @param {*} routes: 路由列表 通过name找到对应路由信息
- * @returns
- */
-const canTurnTo = (name, access, routes) => {
-  const permissionjudge = list => {
-    return list.some(route => {
-      if (route.children && route.children.length) {
-        return permissionjudge(route.children);
-      } else if (route.name === name) {
-        //找到name对应route,如果有mata.access 则判断权限
-        if (route.meta && route.meta.access) {
-          return hasOneOf(access, route.meta.access);
-        } else {
-          return true;
-        }
-      }
-    });
-  };
+// /**
+//  * @description 用户是否可跳转页面
+//  * @param {String} name 跳转页面路由name
+//  * @param {Array} access 用户权限数组
+//  * @param {*} routes: 路由列表 通过name找到对应路由信息
+//  * @returns
+//  */
+// const canTurnTo = (name, access, routes) => {
+//   const permissionjudge = list => {
+//     return list.some(route => {
+//       if (route.children && route.children.length) {
+//         return permissionjudge(route.children);
+//       } else if (route.name === name) {
+//         //找到name对应route,如果有mata.access 则判断权限
+//         if (route.meta && route.meta.access) {
+//           return hasOneOf(access, route.meta.access);
+//         } else {
+//           return true;
+//         }
+//       }
+//     });
+//   };
 
-  return permissionjudge(routes);
-};
+//   return permissionjudge(routes);
+// };
 
 export default router;

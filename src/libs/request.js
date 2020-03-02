@@ -1,7 +1,8 @@
 import axios from 'axios';
 // import store from '@/store';
 import config from '@/config/index';
-import message from 'view-design/src/components/message';
+import modal from 'view-design/src/components/modal';
+// import { message } from 'view-design';
 // node_modules/view-design/src/components/message/index.js
 
 const errorhandle = error => {
@@ -16,20 +17,23 @@ const errorhandle = error => {
     // const errorInfo = { requestURL: path, status, statusText };
 
     // const router = Vue.$router;
-    const messages = message;
-    console.log(messages);
 
     if (status === 404) {
       //提示错误
       // console.log(error.response);
-      message.error({
-        content: '未找到资源'
+      modal.error({
+        title: '<h3>请求失败</h3>',
+        content: '  未找相关资源,请检查后再操作!'
       });
     }
     //如果是401,当前返回值是 login返回的,则不跳转401
     if (status === 401 && !(result && result.isLogin)) {
       //提示错误
       // console.log(error.response);
+      modal.error({
+        title: '<h3>请求失败</h3>',
+        content: '您没有所需权限!'
+      });
     }
   }
 
