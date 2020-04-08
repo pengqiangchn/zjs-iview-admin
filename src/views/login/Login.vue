@@ -29,24 +29,32 @@
       LoginForm
     },
     methods: {
-      ...mapActions(["Login", "SetUserMenuList"]),
+      ...mapActions(["Login", "GetUserInfo", "SetUserMenuList"]),
       Submit(userData) {
         this.Login(userData)
-          .then(res => {
-            console.log("LoginSuccess", res);
-            this.LoginSuccess();
+          .then(() => {
+            this.GetUserInfo(userData)
+              .then(res => {
+                this.LoginSuccess({
+                  routes: routes,
+                  roles: res.roles
+                });
+              })
+              .catch(error => {
+                this.LoginFail(error);
+              })
+              .finally(() => {
+                this.btnLaoding = false;
+              });
           })
           .catch(error => {
             this.LoginFail(error);
-          })
-          .finally(() => {
-            this.btnLaoding = false;
           });
         this.btnLaoding = true;
       },
-      LoginSuccess() {
+      LoginSuccess(data) {
+        this.SetUserMenuList(data);
         this.isLoginError = false;
-        this.SetUserMenuList({ routes: routes, roles: ["user"] });
         //获取用户信息,并跳转
         this.$router.push("home");
       },
@@ -57,6 +65,7 @@
           this.errorMessage = result.message;
 
           this.isLoginError = true;
+          this.btnLaoding = false;
         }
       }
     }

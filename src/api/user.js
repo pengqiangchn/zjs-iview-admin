@@ -1,5 +1,13 @@
 import axios from '@/libs/request';
 
+export const getUserInfo = parameter => {
+  return axios.request({
+    url: 'user',
+    method: 'get',
+    params: parameter
+  });
+};
+
 export const login = data => {
   return axios.request({
     url: 'login',

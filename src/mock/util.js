@@ -1,9 +1,19 @@
 const responseBody = {
-  result: null
+  data: null
 };
 
+/**
+ * 输出格式为:
+ * data:{
+ *   数据,
+ *   message
+ * }
+ * status: 状态码
+ *
+ */
+
 export const builder = (data, code = 0, headers = {}) => {
-  responseBody.result = data;
+  responseBody.data = data;
   if (code !== undefined && code !== 0) {
     responseBody._status = code;
   }

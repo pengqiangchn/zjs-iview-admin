@@ -1,18 +1,27 @@
 <template>
   <Form ref="loginForm" :model="userData" :rules="loginRules" inline>
-    <FormItem prop="userName">
-      <Input type="text" v-model="userData.userName" placeholder="用户名">
+    <FormItem prop="userCode">
+      <Input
+        ref="loginUserCode"
+        type="text"
+        v-model="userData.userCode"
+        @on-enter="userCodeEnter"
+        placeholder="用户名"
+      >
       </Input>
     </FormItem>
     <FormItem prop="password">
-      <Input type="password" v-model="userData.password" placeholder="密码">
+      <Input
+        ref="loginUserCode"
+        type="password"
+        v-model="userData.password"
+        @on-enter="handleSubmit"
+        placeholder="密码"
+      >
       </Input>
     </FormItem>
     <FormItem>
-      <Button
-        type="primary"
-        :loading="loading"
-        @click="handleSubmit('loginForm')"
+      <Button type="primary" :loading="loading" @click="handleSubmit"
         >登录</Button
       >
     </FormItem>
@@ -30,11 +39,11 @@
     data() {
       return {
         userData: {
-          userName: "",
+          userCode: "",
           password: ""
         },
         loginRules: {
-          userName: [
+          userCode: [
             {
               required: true,
               message: "请输入用户名",
@@ -53,15 +62,15 @@
       };
     },
     methods: {
-      handleSubmit(name) {
-        this.$refs[name].validate(valid => {
+      userCodeEnter() {
+        this.$refs.loginUserCode.focus();
+      },
+      handleSubmit() {
+        this.$refs.loginForm.validate(valid => {
           if (valid) {
-            this.UserSubmit();
+            this.$emit("loginFormSubmit", this.userData);
           }
         });
-      },
-      UserSubmit() {
-        this.$emit("loginFormSubmit", this.userData);
       }
     }
   };

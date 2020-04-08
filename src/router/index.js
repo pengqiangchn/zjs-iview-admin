@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import iView from 'view-design';
 import routes from './router-config.js';
-import { hasOneOf } from '@/libs/util.js';
 import lsUser from '@/storage/user';
+import { hasOneOf } from '@/libs/util.js';
 
 const PAGE_LOGIN = 'login';
 const PAGE_DEFAULT = 'home';
@@ -33,9 +33,9 @@ router.beforeEach((to, from, next) => {
     //如果已经登陆了,跳转是登录界面,则跳转到主页
     next({ name: PAGE_DEFAULT });
   } else {
-    //进行跳转
-    // let access = ['admin'];
-    // turnTo(to, access, next);
+    //虽然menu进行了判断,隐藏了功能菜单,但是如果手打地址的话会存在风险.
+    //所以进行跳转,判断权限并跳转
+    turnTo(to, Vue.$store.getters.roles, next);
     next();
   }
 });
@@ -45,47 +45,43 @@ router.afterEach(() => {
   window.scrollTo(0, 0);
 });
 
-// /**
-//  * @description
-//  * @param {*} to 需跳转路由
-//  * @param {*} access 用户权限数据
-//  * @param {*} next
-//  */
-// const turnTo = (to, access, next) => {
-//   if (canTurnTo(to.name, access, routes)) {
-//     //有权限 则继续访问
-//     next();
-//   } else {
-//     //无权限则重定向 401.
-//     // next({ replace: true, name: 'error_401' });
-//     next();
-//   }
-// };
+/**
+ * @description
+ * @param {*} to 需跳转路由
+ * @param {*} access 用户权限数据
+ * @param {*} next
+ */
+const turnTo = (to, access, next) => {
+  if (canTurnTo(to.name, access, routes)) {
+    //有权限 则继续访问
+    next();
+  } else {
+    //无权限则重定向 401.
+    next({ replace: true, name: 'error_401' });
+    next();
+  }
+};
 
-// /**
-//  * @description 用户是否可跳转页面
-//  * @param {String} name 跳转页面路由name
-//  * @param {Array} access 用户权限数组
-//  * @param {*} routes: 路由列表 通过name找到对应路由信息
-//  * @returns
-//  */
-// const canTurnTo = (name, access, routes) => {
-//   const permissionjudge = list => {
-//     return list.some(route => {
-//       if (route.children && route.children.length) {
-//         return permissionjudge(route.children);
-//       } else if (route.name === name) {
-//         //找到name对应route,如果有mata.access 则判断权限
-//         if (route.meta && route.meta.access) {
-//           return hasOneOf(access, route.meta.access);
-//         } else {
-//           return true;
-//         }
-//       }
-//     });
-//   };
+/**
+ * @description 用户是否可跳转页面
+ * @param {String} name 跳转页面路由name
+ * @param {Array} roles 用户权限数组
+ * @param {*} routes: 路由列表 通过name找到对应路由信息
+ * @returns
+ */
+const canTurnTo = (name, roles, routes) => {
+  const permission = list => {
+    return list.some(route => {
+      if (route.children && route.children.length) {
+        return permission(route.children);
+      } else if (route.name === name) {
+        //找到name对应route,如果有meta.roles 则判断权限
+        return route.meta && route.meta.roles ? hasOneOf(roles, route.meta.access) : true;
+      }
+    });
+  };
 
-//   return permissionjudge(routes);
-// };
+  return permission(routes);
+};
 
 export default router;

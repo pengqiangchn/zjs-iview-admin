@@ -48,8 +48,10 @@ class HttpRequest {
   getInsideConfig() {
     const config = {
       baseURL: this.baseUrl,
-      timeout: this.timeout
-      //   headers: {}
+      timeout: this.timeout,
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      }
     };
     return config;
   }

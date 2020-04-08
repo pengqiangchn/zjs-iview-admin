@@ -14,6 +14,8 @@ export default new Vuex.Store({
     user
   },
   getters: {
-    menuList: state => state.app.menuList
+    menuList: state => state.app.menuList,
+    userInfo: state => state.user.info,
+    roles: state => state.user.roles
   }
 });

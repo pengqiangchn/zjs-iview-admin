@@ -1,6 +1,6 @@
 import config from '@/config/index';
 import { isIE } from '@/libs/util';
-import { login, logout } from './services/user';
+import { login, logout, getUserInfo } from './services/user';
 
 if (config.isUseMock) {
   if (isIE()) {
@@ -18,6 +18,7 @@ if (config.isUseMock) {
 
   Mock.mock(/\/api\/login/, 'post', login);
   Mock.mock(/\/api\/logout/, 'post', logout);
+  Mock.mock(/\/api\/user/, 'get', getUserInfo);
 
   // Mock.mock(/\/api\/login/, 'post', login);
   // const data = {

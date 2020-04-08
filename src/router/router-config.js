@@ -304,7 +304,7 @@ const routes = [
     children: [
       {
         path: '401',
-        name: '401',
+        name: 'error_401',
         meta: {
           title: '无权限访问',
           isHide: false
@@ -313,7 +313,7 @@ const routes = [
       },
       {
         path: '500',
-        name: '500',
+        name: 'error_500',
         meta: {
           title: '服务器相应失败',
           isHide: false
@@ -323,7 +323,7 @@ const routes = [
       {
         //上面的都没匹配 就到404
         path: '404',
-        name: '404',
+        name: 'error_404',
         meta: {
           title: '未找到资源',
           isHide: false
@@ -334,7 +334,7 @@ const routes = [
   },
   {
     path: '/error_404',
-    name: 'error_404',
+    name: 'global_404',
     meta: {
       title: '未找到资源',
       isHide: false

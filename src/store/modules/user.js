@@ -1,4 +1,4 @@
-import { login, logout } from '@/api/user';
+import { login, logout, getUserInfo } from '@/api/user';
 import lsUser from '@/storage/user';
 
 const user = {
@@ -23,6 +23,20 @@ const user = {
     }
   },
   actions: {
+    GetUserInfo({ commit }, userCode) {
+      return new Promise((resolve, reject) => {
+        getUserInfo(userCode)
+          .then(res => {
+            const data = res.data;
+            commit('setRoles', data.roles);
+            commit('setInfo', data);
+            resolve(data);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo)
