@@ -19,5 +19,6 @@ if (IsProd) {
 
 module.exports = {
   presets: ['@vue/cli-plugin-babel/preset'],
-  plugins
+  plugins,
+  useBuiltIns: 'usage',
 };
